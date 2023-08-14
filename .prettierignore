@@ -1,0 +1,5 @@
+ package-lock.json
+ build/
+ build.md5/
+ .idea/
+ node_modules/

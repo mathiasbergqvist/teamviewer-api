@@ -7,7 +7,8 @@
     "test": "jest",
     "test-watch": "jest --watch",
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "prettier:fix": "prettier --write src/**/*.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "jest": "^29.6.2",
     "nodemon": "^3.0.1",
+    "prettier": "^3.0.1",
     "supertest": "^6.3.3"
   }
 }
