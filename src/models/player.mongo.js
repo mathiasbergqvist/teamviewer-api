@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const playerSchema = new mongoose.Schema({
     name: {
@@ -11,7 +11,7 @@ const playerSchema = new mongoose.Schema({
     },
     position: {
         type: String,
-        enum: ["goalkeeper", "defender", "midfielder", "forward"],
+        enum: ['goalkeeper', 'defender', 'midfielder', 'forward'],
         required: true,
     },
     league: {
@@ -24,4 +24,4 @@ const playerSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Player", playerSchema);
+module.exports = mongoose.model('Player', playerSchema);
