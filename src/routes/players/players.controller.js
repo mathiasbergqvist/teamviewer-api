@@ -1,4 +1,4 @@
-const {getAllPlayers, getPlayerById, savePlayer} = require("../../models/player.model");
+const {getAllPlayers, getPlayerById, savePlayer, updatePlayer} = require("../../models/player.model");
 
 const httpGetAllPlayers = async (req, res) => {
     try {
@@ -33,9 +33,27 @@ const httpSavePlayer = async (req, res) => {
     }
 };
 
+const httpUpdatePlayer = async (req, res) => {
+    try {
+        const playerId = req.params.id;
+        const playerToUpdate = req.body;
+        const updatedPlayer = updatePlayer(playerId,playerToUpdate);
+        console.log("updatedPlayer", updatedPlayer)
+        if (updatedPlayer) {
+            return res.status(200).json(updatedPlayer);
+        } else {
+            return res.status(404).json({error: "Player not found"});
+        }
+    } catch (error) {
+        console.log("error", error);
+        return res.status(400).json({error});
+    }
+};
+
 module.exports = {
     httpGetAllPlayers,
     httpGetPlayerById,
-    httpSavePlayer
+    httpSavePlayer,
+    httpUpdatePlayer,
 };
 

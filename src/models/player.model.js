@@ -17,7 +17,7 @@ const savePlayer = async (newPlayer) => {
 };
 
 const updatePlayer = async (playerId, updatedPlayer) =>
-    await Player.findByIdAndUpdate(playerId, updatePlayer);
+    await Player.findByIdAndUpdate(playerId, updatedPlayer);
 
 const deletePlayer = async (playerId) => await Player.findOneAndDelete({ _id: playerId });
 
