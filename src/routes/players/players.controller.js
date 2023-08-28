@@ -1,11 +1,11 @@
-const {getAllPlayers, getPlayerById, savePlayer, updatePlayer} = require("../../models/player.model");
+const {getAllPlayers, getPlayerById, savePlayer, updatePlayer, deletePlayer} = require("../../models/player.model");
 
 const httpGetAllPlayers = async (req, res) => {
     try {
         const allPlayers = await getAllPlayers();
         return res.status(200).json(allPlayers);
     } catch (error) {
-        return res.status(400).json({error});
+        return res.status(400).json({error: "Error from httpGetAllPlayers"});
     }
 };
 
@@ -15,11 +15,11 @@ const httpGetPlayerById = async (req, res) => {
         const playerById = await getPlayerById(playerId);
         if (playerById) {
             return res.status(200).json(playerById);
-        } else {
-            return res.status(404).json({error: "Player not found"});
-        }
+        } 
+            
+        return res.status(404).json({error: "Player not found"});
     } catch (error) {
-        return res.status(400).json({error});
+        return res.status(400).json({error: "Error from httpGetPlayerById"});
     }
 };
 
@@ -29,7 +29,7 @@ const httpSavePlayer = async (req, res) => {
         const savedPlayer = await savePlayer(newPlayer);
         return res.status(201).json(savedPlayer);
     } catch (error) {
-        return res.status(400).json({error});
+        return res.status(400).json({error: "Error from httpSavePlayer"});
     }
 };
 
@@ -37,16 +37,28 @@ const httpUpdatePlayer = async (req, res) => {
     try {
         const playerId = req.params.id;
         const playerToUpdate = req.body;
-        const updatedPlayer = updatePlayer(playerId,playerToUpdate);
-        console.log("updatedPlayer", updatedPlayer)
+        const updatedPlayer = await updatePlayer(playerId,playerToUpdate);
         if (updatedPlayer) {
             return res.status(200).json(updatedPlayer);
-        } else {
-            return res.status(404).json({error: "Player not found"});
-        }
+        } 
+        
+        return res.status(404).json({error: "Player not found"});
     } catch (error) {
-        console.log("error", error);
-        return res.status(400).json({error});
+        return res.status(400).json({error: "Error from httpUpdatePlayer"});
+    }
+};
+
+const httpDeletePlayer = async (req, res) => {
+    try {
+        const playerId = req.params.id;
+        const deletedPlayer = await deletePlayer(playerId);
+        if (deletedPlayer) {
+            return res.status(200).json(deletedPlayer);
+        } 
+        
+        return res.status(404).json({error: "Player not found"});
+    } catch (err) {
+        return res.status(400).json({error: "Error from httpDeletePlayer"});
     }
 };
 
@@ -55,5 +67,6 @@ module.exports = {
     httpGetPlayerById,
     httpSavePlayer,
     httpUpdatePlayer,
+    httpDeletePlayer,
 };
 
