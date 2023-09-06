@@ -1,5 +1,10 @@
 const Team = require("./teams.mongo");
 
+
+const getAllTeams = async () => await Team.find({}).populate('players');
+
+const getTeamById = async (teamId) => await Team.findById(teamId).populate('players');
+
 const saveTeam = async (newTeam) => {
     const {name, stadium, manager, league, playerIds} = newTeam;
     const teamToSave = new Team({
@@ -14,9 +19,17 @@ const saveTeam = async (newTeam) => {
     return await Team.create(teamToSave);
 };
 
-const getAllTeams = async () => await Team.find({}).populate('players');
+const updateTeam = async (teamId, updatedTeam) => (
+   await Team.findByIdAndUpdate(teamId, updatedTeam)
+);
+
+const deleteTeam = async (teamId) => await Team.findByIdAndDelete(teamId);
+
 
 module.exports = {
-    saveTeam,
     getAllTeams,
+    getTeamById,
+    saveTeam,
+    updateTeam,
+    deleteTeam,
 };
