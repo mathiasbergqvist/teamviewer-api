@@ -1,13 +1,20 @@
-const { httpGetAllTeams, httpGetTeamById, httpSaveTeam, httpUpdateTeam, httpDeleteTeam } = require("./teams.controller");
+const { validateMongoDbId } = require("../validations");
+const { 
+    httpGetAllTeams,
+    httpGetTeamById,
+    httpSaveTeam,
+    httpUpdateTeam,
+    httpDeleteTeam
+} = require("./teams.controller");
 
 const express = require("express");
 
 const teamsRouter = express.Router();
 
 teamsRouter.get("/", httpGetAllTeams);
-teamsRouter.get("/:id", httpGetTeamById);
+teamsRouter.get("/:id", validateMongoDbId(), httpGetTeamById);
 teamsRouter.post("/", httpSaveTeam);
-teamsRouter.put("/:id", httpUpdateTeam);
-teamsRouter.delete("/:id", httpDeleteTeam);
+teamsRouter.put("/:id", validateMongoDbId(), httpUpdateTeam);
+teamsRouter.delete("/:id", validateMongoDbId(), httpDeleteTeam);
 
 module.exports = teamsRouter;

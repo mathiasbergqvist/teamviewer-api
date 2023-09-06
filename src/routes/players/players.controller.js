@@ -1,4 +1,5 @@
 const {getAllPlayers, getPlayerById, savePlayer, updatePlayer, deletePlayer} = require("../../models/player.model");
+const { validationResult } = require("express-validator");
 
 const httpGetAllPlayers = async (req, res) => {
     try {
@@ -10,6 +11,10 @@ const httpGetAllPlayers = async (req, res) => {
 };
 
 const httpGetPlayerById = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: errors.array() });
+    }
     try {
         const playerId = req.params.id;
         const playerById = await getPlayerById(playerId);
@@ -37,7 +42,7 @@ const httpUpdatePlayer = async (req, res) => {
     try {
         const playerId = req.params.id;
         const playerToUpdate = req.body;
-        const updatedPlayer = await updatePlayer(playerId,playerToUpdate);
+        const updatedPlayer = await updatePlayer(playerId, playerToUpdate);
         if (updatedPlayer) {
             return res.status(200).json(updatedPlayer);
         } 
