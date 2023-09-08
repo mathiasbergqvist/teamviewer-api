@@ -1,4 +1,4 @@
-const { validateMongoDbId } = require("../validations");
+const { validateMongoDbId, validatePlayer, validateIdAndPlayer } = require("../validations");
 const {
     httpGetAllPlayers,
     httpGetPlayerById,
@@ -13,8 +13,8 @@ const playersRouter = express.Router();
 
 playersRouter.get("/", httpGetAllPlayers);
 playersRouter.get("/:id", validateMongoDbId(), httpGetPlayerById);
-playersRouter.post("/", httpSavePlayer);
-playersRouter.put("/:id", validateMongoDbId(), httpUpdatePlayer);
+playersRouter.post("/", validatePlayer(), httpSavePlayer);
+playersRouter.put("/:id", validateIdAndPlayer(), httpUpdatePlayer);
 playersRouter.delete("/:id", validateMongoDbId(), httpDeletePlayer);
 
 module.exports = playersRouter;

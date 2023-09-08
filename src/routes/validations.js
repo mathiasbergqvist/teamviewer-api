@@ -7,6 +7,21 @@ const validateMongoDbId = () => check('id').custom((value) => {
     return true;
 });
 
+const validatePlayer = () => [
+  body('name').isString().notEmpty(),
+  body('position').isIn(['goalkeeper', 'defender', 'midfielder', 'forward']).withMessage('Invalid value for position'),
+  body('number').isNumeric(),
+  body('league').isString().notEmpty(),
+  body('countryUnicode').isString().notEmpty(),
+];
+
+const validateIdAndPlayer = () => [
+  validateMongoDbId(),
+  ...validatePlayer(),
+];
+
 module.exports = {
     validateMongoDbId,
+    validatePlayer,
+    validateIdAndPlayer,
 };
