@@ -1,4 +1,11 @@
-const {saveTeam, getAllTeams, getTeamById, updateTeam, deleteTeam} = require("../../models/teams.model");
+const { validationResult } = require("express-validator");
+const {
+    saveTeam,
+    getAllTeams,
+    getTeamById,
+    updateTeam,
+    deleteTeam
+} = require("../../models/teams.model");
 
 const httpGetAllTeams = async (req, res) => {
     try {
@@ -10,6 +17,10 @@ const httpGetAllTeams = async (req, res) => {
 };
 
 const httpGetTeamById = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: errors.array() });
+    }
     try {
         const id = req.params.id;
         const team = await getTeamById(id);
@@ -25,6 +36,10 @@ const httpGetTeamById = async (req, res) => {
 };
 
 const httpSaveTeam = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: errors.array() });
+    }
     try {
         const newTeam = req.body;
         const savedTeam = await saveTeam(newTeam);
@@ -35,6 +50,10 @@ const httpSaveTeam = async (req, res) => {
 };
 
 const httpUpdateTeam = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: errors.array() });
+    }
     try {
         const id = req.params.id;
         const teamToUpdate = req.body;
@@ -49,6 +68,10 @@ const httpUpdateTeam = async (req, res) => {
 };
 
 const httpDeleteTeam = async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ error: errors.array() });
+    }
     try {
         const teamId = req.params.id;
         const deletedTeam = deleteTeam(teamId);

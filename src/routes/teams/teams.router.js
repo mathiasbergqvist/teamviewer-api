@@ -1,4 +1,4 @@
-const { validateMongoDbId } = require("../validations");
+const { validateMongoDbId, validateTeam, validateIdAndTeam } = require("../validations");
 const { 
     httpGetAllTeams,
     httpGetTeamById,
@@ -13,8 +13,8 @@ const teamsRouter = express.Router();
 
 teamsRouter.get("/", httpGetAllTeams);
 teamsRouter.get("/:id", validateMongoDbId(), httpGetTeamById);
-teamsRouter.post("/", httpSaveTeam);
-teamsRouter.put("/:id", validateMongoDbId(), httpUpdateTeam);
+teamsRouter.post("/", validateTeam(), httpSaveTeam);
+teamsRouter.put("/:id", validateIdAndTeam(), httpUpdateTeam);
 teamsRouter.delete("/:id", validateMongoDbId(), httpDeleteTeam);
 
 module.exports = teamsRouter;

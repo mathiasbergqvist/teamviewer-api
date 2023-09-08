@@ -1,4 +1,4 @@
-const { body, check, validationResult } = require("express-validator");
+const { body, check } = require("express-validator");
 
 const validateMongoDbId = () => check('id').custom((value) => {
     if (!/^[0-9a-fA-F]{24}$/.test(value)) {
@@ -20,8 +20,24 @@ const validateIdAndPlayer = () => [
   ...validatePlayer(),
 ];
 
+const validateTeam = () => [
+  body('name').isString().notEmpty(),
+  body('stadium').isString().notEmpty(),
+  body('manager').isString().notEmpty(),
+  body('league').isString().notEmpty(),
+  body('playerIds').optional().isArray().withMessage('playerIds must be an array'),
+  body('playerIds.*').isMongoId().withMessage('playerId must be id of correct format'),
+];
+
+const validateIdAndTeam = () => [
+  validateMongoDbId(),
+  ...validateTeam(),
+];
+
 module.exports = {
     validateMongoDbId,
     validatePlayer,
     validateIdAndPlayer,
+    validateTeam,
+    validateIdAndTeam,
 };
