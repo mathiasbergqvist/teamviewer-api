@@ -21,14 +21,16 @@ app.use(
 );
 app.use(morgan("combined"));
 app.use(express.json());
-app.use(
-    basicAuth({
-        users,
-        unauthorizedResponse: {
-        message: "Unauthorized",
-    },
-    })
-);    
+if (process.env.API_ENV !== "test") {
+    app.use(
+        basicAuth({
+            users,
+            unauthorizedResponse: {
+            message: "Unauthorized",
+        },
+        })
+    );
+}
 app.use("/v1", api);
 
 module.exports = app;

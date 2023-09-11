@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test-watch": "jest --watch",
+    "test": "API_ENV=test jest",
+    "test-watch": "API_ENV=test jest --watch",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "prettier:fix": "prettier --write src/**/*.js"
@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "jest": "^29.6.2",
+    "mockingoose": "^2.16.2",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.1",
     "supertest": "^6.3.3"
