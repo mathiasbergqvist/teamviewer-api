@@ -11,7 +11,7 @@ const playerSchema = new mongoose.Schema({
     },
     position: {
         type: String,
-        enum: ['goalkeeper', 'defender', 'midfielder', 'forward'],
+        enum: ['Goalkeeper', 'Defender', 'Midfielder', 'Forward', 'Squad'],
         required: true,
     },
     league: {
