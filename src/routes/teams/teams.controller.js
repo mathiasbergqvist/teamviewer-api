@@ -51,7 +51,6 @@ const httpUpdateTeam = async (req, res) => {
     try {
         const id = req.params.id;
         const teamToUpdate = req.body;
-        console.log('teamToUpdate', teamToUpdate);
         const updatedTeam = await updateTeam(id, teamToUpdate);
         if (updatedTeam) {
             return res.status(200).json(updatedTeam);
