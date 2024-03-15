@@ -9,7 +9,6 @@ describe('Players API', () => {
         name: 'Ziggy Stardust',
         number: 99,
         position: 'Forward',
-        league: 'Premier League',
         countryUnicode: '1F3C1',
         __v: 0,
     };
@@ -74,7 +73,7 @@ describe('Players API', () => {
                 .expect('Content-Type', /json/)
                 .expect(400);
 
-            expect(response.body.error.length).toBe(6);
+            expect(response.body.error.length).toBe(4);
         });
     });
 

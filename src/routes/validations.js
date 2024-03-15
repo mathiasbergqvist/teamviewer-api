@@ -14,7 +14,6 @@ const validatePlayer = () => [
         .isIn(['Goalkeeper', 'Defender', 'Midfielder', 'Forward', 'Squad'])
         .withMessage('Invalid value for position'),
     body('number').isNumeric(),
-    body('league').isString().notEmpty(),
     body('countryUnicode').isString().notEmpty(),
 ];
 
