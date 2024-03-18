@@ -11,7 +11,21 @@ const validateMongoDbId = () =>
 const validatePlayer = () => [
     body('name').isString().notEmpty(),
     body('position')
-        .isIn(['Goalkeeper', 'Defender', 'Midfielder', 'Forward', 'Squad'])
+        .isIn([
+            'Goalkeeper',
+            'Defender',
+            'Midfielder',
+            'Forward',
+            'Squad',
+            'LeftBack',
+            'RightBack',
+            'CentreBack',
+            'DefensiveMidfielder',
+            'AttackingMidfielder',
+            'LeftWinger',
+            'RightWinger',
+            'Striker',
+        ])
         .withMessage('Invalid value for position'),
     body('number').isNumeric(),
     body('countryUnicode').isString().notEmpty(),
