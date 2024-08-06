@@ -4,6 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const api = require('./routes/api');
 const basicAuth = require('express-basic-auth');
+const toobusy = require('toobusy-js');
 require('dotenv').config();
 
 const username = process.env.BASIC_AUTH_USERNAME;
@@ -23,6 +24,13 @@ app.use(
 app.use(morgan('combined'));
 app.use(express.urlencoded({ extended: true, limit: '1kb' }));
 app.use(express.json({ limit: '1kb' }));
+app.use((_, res, next) => {
+    if (toobusy()) {
+        res.status(503).send('Server Too Busy');
+    } else {
+        next();
+    }
+});
 if (process.env.API_ENV !== 'test') {
     app.use(
         basicAuth({

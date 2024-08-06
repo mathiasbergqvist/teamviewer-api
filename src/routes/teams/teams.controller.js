@@ -1,6 +1,5 @@
 const { validationResult } = require('express-validator');
 const { saveTeam, getAllTeams, getTeamById, updateTeam, deleteTeam } = require('../../models/teams.model');
-
 const httpGetAllTeams = async (req, res) => {
     try {
         const allTeams = await getAllTeams();
