@@ -25,6 +25,10 @@ const validatePlayer = () => [
             'LeftWinger',
             'RightWinger',
             'Striker',
+            'Quarterback',
+            'RunningBack',
+            'WideReceiver',
+            'TightEnd',
         ])
         .withMessage('Invalid value for position'),
     body('number').isNumeric(),
