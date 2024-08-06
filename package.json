@@ -19,6 +19,7 @@
     "express-basic-auth": "^1.2.1",
     "express-validator": "^7.0.1",
     "helmet": "^7.0.0",
+    "hpp": "^0.2.3",
     "mongoose": "^7.4.2",
     "morgan": "^1.10.0",
     "toobusy-js": "^0.5.1"
