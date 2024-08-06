@@ -21,7 +21,8 @@ app.use(
     })
 );
 app.use(morgan('combined'));
-app.use(express.json());
+app.use(express.urlencoded({ extended: true, limit: '1kb' }));
+app.use(express.json({ limit: '1kb' }));
 if (process.env.API_ENV !== 'test') {
     app.use(
         basicAuth({
