@@ -4,8 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npx husky install
-
+# Only install dependencies that are needed for production
 RUN npm install --omit=dev
 
 COPY src/ src/
