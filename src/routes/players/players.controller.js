@@ -12,6 +12,7 @@ const httpGetAllPlayers = async (req, res) => {
         const allPlayers = await getAllPlayers();
         return res.status(200).json(allPlayers);
     } catch (error) {
+        console.error(error);
         return res.status(400).json({ error: 'Error from httpGetAllPlayers' });
     }
 };
@@ -30,6 +31,7 @@ const httpGetPlayerById = async (req, res) => {
 
         return res.status(404).json({ error: 'Player not found' });
     } catch (error) {
+        console.error(error);
         return res.status(400).json({ error: 'Error from httpGetPlayerById' });
     }
 };
@@ -44,6 +46,7 @@ const httpSavePlayer = async (req, res) => {
         const savedPlayer = await savePlayer(newPlayer);
         return res.status(201).json(savedPlayer);
     } catch (error) {
+        console.error(error);
         return res.status(400).json({ error: 'Error from httpSavePlayer' });
     }
 };
@@ -63,6 +66,7 @@ const httpUpdatePlayer = async (req, res) => {
 
         return res.status(404).json({ error: 'Player not found' });
     } catch (error) {
+        console.error(error);
         return res.status(400).json({ error: 'Error from httpUpdatePlayer' });
     }
 };
@@ -80,7 +84,8 @@ const httpDeletePlayer = async (req, res) => {
         }
 
         return res.status(404).json({ error: 'Player not found' });
-    } catch (err) {
+    } catch (error) {
+        console.error(error);
         return res.status(400).json({ error: 'Error from httpDeletePlayer' });
     }
 };

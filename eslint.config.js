@@ -16,6 +16,6 @@ module.exports = [
         },
     },
     {
-        ignores: ['**/*.test.js'],
+        ignores: ['**/*.test.js', '**/*.config.js'],
     },
 ];

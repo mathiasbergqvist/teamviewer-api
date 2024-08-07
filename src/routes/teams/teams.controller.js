@@ -5,6 +5,7 @@ const httpGetAllTeams = async (req, res) => {
         const allTeams = await getAllTeams();
         return res.status(200).json(allTeams);
     } catch (error) {
+        console.error(error);
         return res.status(400).json({ error: 'Error from httpGetAllTeams' });
     }
 };
@@ -24,6 +25,7 @@ const httpGetTeamById = async (req, res) => {
 
         return res.status(404).json({ error: 'Team not found' });
     } catch (error) {
+        console.error(error);
         return res.status(400).json({ error: 'Error from httpGetTeamById' });
     }
 };
@@ -38,6 +40,7 @@ const httpSaveTeam = async (req, res) => {
         const savedTeam = await saveTeam(newTeam);
         return res.status(201).json(savedTeam);
     } catch (error) {
+        console.error(error);
         return res.status(400).json({ error: 'Error from httpSaveTeam' });
     }
 };
@@ -56,6 +59,7 @@ const httpUpdateTeam = async (req, res) => {
         }
         return res.status(404).json({ error: 'Team not found' });
     } catch (error) {
+        console.error(error);
         return res.status(400).json({ error: 'Error from httpUpdateTeam' });
     }
 };
@@ -74,6 +78,7 @@ const httpDeleteTeam = async (req, res) => {
 
         return res.status(404).json({ error: 'Team not found' });
     } catch (error) {
+        console.error(error);
         return res.status(400).json({ error: 'Error from httpDeleteTeam' });
     }
 };
