@@ -45,4 +45,10 @@ if (process.env.API_ENV !== 'test') {
 }
 app.use('/v1', api);
 
+// catches uncaught exceptions
+process.on('uncaughtException', (err) => {
+    console.error(`uncaughtException: ${err}`);
+    process.exit(); // exit the process to avoid unknown state
+});
+
 module.exports = app;
