@@ -17,10 +17,12 @@ const teamsSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    players: [{
+    players: [
+        {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Player',
-    }],
+        },
+    ],
 });
 
 module.exports = mongoose.model('Team', teamsSchema);

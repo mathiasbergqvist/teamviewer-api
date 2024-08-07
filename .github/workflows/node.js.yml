@@ -25,9 +25,16 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   cache: 'npm'
-            - run: npm ci
-            - run: npm run build --if-present
-            - run: npm test
+            - name: Clean install dependencies
+              run: npm ci
+            - name: Run build
+              run: npm run build --if-present
+            - name: Run lint check
+              run: npm lint
+            - name: Run tests
+              run: npm test
+            - name: Run snyk test
+              run: npm test-snyk
 
     docker-build-and-push-image:
         needs: build-and-test
