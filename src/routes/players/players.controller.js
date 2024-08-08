@@ -10,6 +10,8 @@ const { validationResult } = require('express-validator');
 const httpGetAllPlayers = async (req, res) => {
     try {
         const allPlayers = await getAllPlayers();
+
+        res.set('Cache-Control', 'public, max-age=60');
         return res.status(200).json(allPlayers);
     } catch (error) {
         console.error(error);

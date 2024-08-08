@@ -3,6 +3,7 @@ const { saveTeam, getAllTeams, getTeamById, updateTeam, deleteTeam } = require('
 const httpGetAllTeams = async (req, res) => {
     try {
         const allTeams = await getAllTeams();
+        res.set('Cache-Control', 'public, max-age=60');
         return res.status(200).json(allTeams);
     } catch (error) {
         console.error(error);
@@ -20,6 +21,7 @@ const httpGetTeamById = async (req, res) => {
         const team = await getTeamById(id);
 
         if (team) {
+            res.set('Cache-Control', 'public, max-age=60');
             return res.status(200).json(team);
         }
 
