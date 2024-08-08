@@ -4,14 +4,15 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+        "dev": "npm run generate-swagger-models && nodemon src/server.js",
+        "start": "npm run generate-swagger-models && node src/server.js",
         "test": "API_ENV=test jest",
         "test-watch": "API_ENV=test jest --watch",
         "test-snyk": "snyk test",
-        "start": "node src/server.js",
-        "dev": "nodemon src/server.js",
         "prettier:fix": "prettier --write src/**/*.js",
         "lint": "eslint .",
-        "prepare": "husky"
+        "prepare": "husky",
+        "generate-swagger-models": "node ./swagger.js"
     },
     "author": "",
     "license": "ISC",
@@ -26,7 +27,7 @@
         "husky": "^9.1.4",
         "mongoose": "^7.4.2",
         "morgan": "^1.10.0",
-        "swagger-jsdoc": "^6.2.8",
+        "swagger-autogen": "^2.23.7",
         "swagger-ui-express": "^5.0.1",
         "toobusy-js": "^0.5.1"
     },
