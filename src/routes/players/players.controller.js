@@ -7,6 +7,35 @@ const {
 } = require('../../models/player.model');
 const { validationResult } = require('express-validator');
 
+/**
+ * @swagger
+ * /players:
+ *   get:
+ *     summary: Get all players
+ *     description: Returns all players
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                     example: Ziggy Stardust
+ *                   number:
+ *                     type: number
+ *                     example: 30
+ *                   position:
+ *                     type: string
+ *                     example: Goalkeeper
+ *                   countryUnicode:
+ *                     type: string
+ *                     example: GB
+ */
 const httpGetAllPlayers = async (req, res) => {
     try {
         const allPlayers = await getAllPlayers();
@@ -19,6 +48,40 @@ const httpGetAllPlayers = async (req, res) => {
     }
 };
 
+/**
+ * @swagger
+ * /players/{id}:
+ *   get:
+ *     summary: Get player by id
+ *     description: Returns a player by id
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Player id
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 name:
+ *                   type: string
+ *                   example: Ziggy Stardust
+ *                 number:
+ *                   type: number
+ *                   example: 30
+ *                 position:
+ *                   type: string
+ *                   example: Goalkeeper
+ *                 countryUnicode:
+ *                   type: string
+ *                   example: GB
+ */
 const httpGetPlayerById = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -28,6 +91,7 @@ const httpGetPlayerById = async (req, res) => {
         const playerId = req.params.id;
         const playerById = await getPlayerById(playerId);
         if (playerById) {
+            res.set('Cache-Control', 'public, max-age=60');
             return res.status(200).json(playerById);
         }
 

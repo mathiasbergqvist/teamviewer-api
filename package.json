@@ -26,6 +26,8 @@
         "husky": "^9.1.4",
         "mongoose": "^7.4.2",
         "morgan": "^1.10.0",
+        "swagger-jsdoc": "^6.2.8",
+        "swagger-ui-express": "^5.0.1",
         "toobusy-js": "^0.5.1"
     },
     "devDependencies": {

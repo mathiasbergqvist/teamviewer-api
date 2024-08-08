@@ -6,6 +6,8 @@ const api = require('./routes/api');
 const basicAuth = require('express-basic-auth');
 const toobusy = require('toobusy-js');
 const hpp = require('hpp');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('../swagger');
 require('dotenv').config();
 
 const username = process.env.BASIC_AUTH_USERNAME;
@@ -33,6 +35,7 @@ app.use((_, res, next) => {
         next();
     }
 });
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 if (process.env.API_ENV !== 'test') {
     app.use(
         basicAuth({
