@@ -18,12 +18,17 @@ users[username] = password;
 
 const app = express();
 app.use(helmet());
-app.use(
-    cors({
-        origin: clientUrl,
-        optionsSuccessStatus: 200,
-    })
-);
+if (process.env.API_ENV !== 'dev') {
+    app.use(
+        cors({
+            origin: clientUrl,
+            optionsSuccessStatus: 200,
+        })
+    );
+} else {
+    app.use(cors('*'));
+}
+
 app.use(morgan('combined'));
 app.use(express.urlencoded({ extended: true, limit: '1kb' }));
 app.use(express.json({ limit: '1kb' }));
@@ -36,7 +41,8 @@ app.use((_, res, next) => {
     }
 });
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
-if (process.env.API_ENV !== 'test') {
+
+if (process.env.API_ENV !== 'dev') {
     app.use(
         basicAuth({
             users,
