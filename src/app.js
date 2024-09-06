@@ -7,7 +7,7 @@ const basicAuth = require('express-basic-auth');
 const toobusy = require('toobusy-js');
 const hpp = require('hpp');
 const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('../swagger-output.json');
+const swaggerFile = require('./swagger-output.json');
 require('dotenv').config();
 
 const username = process.env.BASIC_AUTH_USERNAME;
