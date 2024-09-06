@@ -4,15 +4,15 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "npm run generate-swagger-models && nodemon src/server.js",
+        "dev": "API_ENV=dev npm run generate-swagger-models && nodemon src/server.js",
         "start": "npm run generate-swagger-models && node src/server.js",
-        "test": "API_ENV=test jest",
-        "test-watch": "API_ENV=test jest --watch",
+        "test": "API_ENV=dev jest",
+        "test-watch": "API_ENV=dev jest --watch",
         "test-snyk": "snyk test",
         "prettier:fix": "prettier --write src/**/*.js",
         "lint": "eslint .",
         "prepare": "husky",
-        "generate-swagger-models": "node ./swagger.js"
+        "generate-swagger-models": "node src/swagger.js"
     },
     "author": "",
     "license": "ISC",

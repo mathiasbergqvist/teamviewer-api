@@ -1,6 +1,6 @@
 const swaggerAutogen = require('swagger-autogen')();
-const playerModel = require('./src/models/player.mongo');
-const teamModel = require('./src/models/teams.mongo');
+const playerModel = require('./models/player.mongo');
+const teamModel = require('./models/teams.mongo');
 
 const generateSwaggerSchema = (model) => {
     const paths = model.schema.paths;
